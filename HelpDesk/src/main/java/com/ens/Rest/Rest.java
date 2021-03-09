@@ -1,4 +1,4 @@
-package com.ens.Web;
+package com.ens.Rest;
 
 import javax.ws.rs.ApplicationPath;
 
@@ -8,6 +8,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class Rest extends ResourceConfig {
 
 	public Rest() {
-		packages("com.ens.Web.Service");
+		packages("com.ens.Rest.WebService");
 	}
 }
