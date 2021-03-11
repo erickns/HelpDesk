@@ -1,5 +1,7 @@
 package com.ens.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ public class Comentario {
 	private Long idChamado;
 	@Column(length = 1000)
 	private String descricao;
+	private Date dtInclusao;
 	
 	public Long getId() {
 		return id;
@@ -32,6 +35,12 @@ public class Comentario {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public Date getDtInclusao() {
+		return dtInclusao;
+	}
+	public void setDtInclusao(Date dtInclusao) {
+		this.dtInclusao = dtInclusao;
 	}
 	
 	

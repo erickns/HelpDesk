@@ -1,0 +1,26 @@
+@charset "ISO-8859-1";
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/*div.row1 {
+   margin: 0;
+   position: relative;               
+   left: 50%;                         
+   transform: translate(0, -50%) }
+   
+   div.row2 {
+   margin: 0;
+   position: relative;               
+   left: 50%;                         
+   transform: translate(0, -50%) }*/
+   
+   div.span3,div.span2,h1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
