@@ -2,6 +2,7 @@ package com.ens.model;
 
 import java.util.Date;
 
+import com.ens.dto.ChamadoDTO;
 import com.ens.model.domain.DominioStatus;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -21,9 +23,9 @@ public class Chamado {
 	@Column(name = "titulo" ,length = 255)
 	private String titulo;
 	
-	@Enumerated(EnumType.STRING)
+	
 	@Column(name = "status" ,length = 2)
-	private DominioStatus Status;
+	private String statusValue;
 	
 	@Column(name = "descricao" ,length = 1000)
 	private String descricao;
@@ -34,6 +36,18 @@ public class Chamado {
 	@Column(name = "dt_conclusao" )
 	private Date dtConclusao;
 	
+	public Chamado() {
+		
+	}
+	
+	public Chamado(ChamadoDTO chamado) {
+		this.id = chamado.getId();
+		this.titulo = chamado.getTitulo();
+		this.statusValue = chamado.getStatus().toValue();
+		this.descricao = chamado.getDescricao();
+		this.dtInclusao = chamado.getDtInclusao();
+		this.dtConclusao = chamado.getDtConclusao();
+	}
 	
 	public Long getId() {
 		return this.id;
@@ -48,10 +62,10 @@ public class Chamado {
 		this.titulo = titulo;
 	}
 	public DominioStatus getStatus() {
-		return Status;
+		return DominioStatus.fromValue(statusValue); 
 	}
 	public void setStatus(DominioStatus status) {
-		Status = status;
+		this.statusValue = status.toValue();  
 	}
 	public String getDescriçao() {
 		return descricao;
@@ -97,7 +111,7 @@ public class Chamado {
 	}
 	@Override
 	public String toString() {
-		return "Chamado [id=" + id + ", titulo=" + titulo + ", Status=" + Status + ", descricao=" + descricao
+		return "Chamado [id=" + id + ", titulo=" + titulo + ", Status=" + statusValue + ", descricao=" + descricao
 				+ ", dtInclusao=" + dtInclusao + ", dtConclusao=" + dtConclusao + "]";
 	}
 	

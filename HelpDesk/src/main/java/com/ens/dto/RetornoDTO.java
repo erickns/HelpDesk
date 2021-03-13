@@ -62,14 +62,8 @@ public class RetornoDTO {
 
 	@Override
 	public String toString() {
-		return "RetornoDTO {"
-				+ "status='" + status + '\''
-				+ ", mensagem='" + mensagem + '\''
-				+ ", protocolo='" + protocolo+ '\''
-				+ ", codigoStatus='" + codigoStatus + '\''
-				+ '}';
+		return "RetornoDTO {status:" + status + ", mensagem:" + mensagem + ", protocolo:" + protocolo
+				+ ", codigoStatus:" + codigoStatus + "}";
 	}
-	
-	
 
 }

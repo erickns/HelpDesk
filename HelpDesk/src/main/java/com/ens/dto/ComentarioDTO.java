@@ -1,74 +1,73 @@
-package com.ens.model;
+package com.ens.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.ens.model.Comentario;
+import com.ens.utils.Util;
 
-import com.ens.dto.ComentarioDTO;
+public class ComentarioDTO {
 
-@Entity
-public class Comentario {
-	
-	@Id
-	@GeneratedValue
 	private Long id;
-	
-	@Column(name = "id_chamado")
 	private Long idChamado;
-	
-	@Column(name = "descricao", length = 1000)
 	private String descricao;
-	
-	@Column(name = "dt_inclusao")
 	private Date dtInclusao;
+
 	
 	
-	
-	public Comentario(ComentarioDTO dto) {
-		
-		this.id = dto.getId();
-		this.idChamado = dto.getIdChamado();
-		this.descricao = dto.getDescricao();
-		this.dtInclusao = dto.getDtInclusao();
+	public ComentarioDTO(Long id, Long idChamado, String descricao, String dtInclusao) {
+		this.id = id != null ? id : null;
+		this.idChamado = idChamado != null ? idChamado : null;;
+		this.descricao = descricao;
+		this.dtInclusao = dtInclusao !=null && !dtInclusao.equals("")  ? Util.stringParaData(dtInclusao) : new Date();
 	}
 
-	public Comentario() {
+	public ComentarioDTO(Comentario comentario) {
 		
+		this.id = comentario.getId();
+		this.idChamado = comentario.getIdChamado();
+		this.descricao = comentario.getDescricao();
+		this.dtInclusao = comentario.getDtInclusao();
 	}
 	
+	public ComentarioDTO() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Long getIdChamado() {
 		return idChamado;
 	}
+
 	public void setIdChamado(Long idChamado) {
 		this.idChamado = idChamado;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public Date getDtInclusao() {
 		return dtInclusao;
 	}
+
 	public void setDtInclusao(Date dtInclusao) {
 		this.dtInclusao = dtInclusao;
 	}
+
 	@Override
 	public String toString() {
 		return "Comentario {id:" + id + ", idChamado:" + idChamado + ", descricao:" + descricao + ", dtInclusao:"
-				+ dtInclusao + "}";
+				+ Util.dataParaString(dtInclusao) + "}";
 	}
-	
-	
-
 }
