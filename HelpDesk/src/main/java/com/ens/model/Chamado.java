@@ -2,15 +2,17 @@ package com.ens.model;
 
 import java.util.Date;
 
-import com.ens.dto.ChamadoDTO;
-import com.ens.model.domain.DominioStatus;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.ens.dto.ChamadoDTO;
+import com.ens.model.domain.DominioStatus;
 
 
 @Entity
@@ -18,6 +20,7 @@ import javax.persistence.Transient;
 public class Chamado {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "titulo" ,length = 255)
@@ -31,9 +34,11 @@ public class Chamado {
 	private String descricao;
 	
 	@Column(name = "dt_inclusao" )
+	@Temporal(TemporalType.DATE)
 	private Date dtInclusao;
 	
 	@Column(name = "dt_conclusao" )
+	@Temporal(TemporalType.DATE)
 	private Date dtConclusao;
 	
 	public Chamado() {

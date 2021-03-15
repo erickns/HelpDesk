@@ -5,7 +5,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.ens.dto.ComentarioDTO;
 
@@ -13,7 +16,7 @@ import com.ens.dto.ComentarioDTO;
 public class Comentario {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "id_chamado")
@@ -23,6 +26,7 @@ public class Comentario {
 	private String descricao;
 	
 	@Column(name = "dt_inclusao")
+	@Temporal(TemporalType.DATE)
 	private Date dtInclusao;
 	
 	

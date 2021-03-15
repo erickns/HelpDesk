@@ -8,7 +8,7 @@ public class Util {
 
 	
 	public static Date stringParaData(String strdata) {		
-		SimpleDateFormat formato = new SimpleDateFormat("DD/MM/YYYY"); 
+		SimpleDateFormat formato = new SimpleDateFormat("YYYY-MM-DD"); 
 		Date dataFormatada = null;
 		try {
 			dataFormatada = formato.parse(strdata);
@@ -20,7 +20,7 @@ public class Util {
 	}
 	
 	public static String dataParaString(Date data) {
-		SimpleDateFormat out = new SimpleDateFormat("DD/MM/YYYY");  
+		SimpleDateFormat out = new SimpleDateFormat("YYYY-MM-DD");  
 		String result = out.format(new Date());
 		return result;
 	}

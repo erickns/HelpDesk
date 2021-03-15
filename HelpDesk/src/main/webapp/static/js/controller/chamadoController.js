@@ -6,12 +6,10 @@ angular.module("HelpDesk", [])
 value("urlBase", "http://localhost:8080/HelpDesk-0.0.1-SNAPSHOT/rest/service/");
 controller("chamadoController", function($scope, $http, $notify, urlBase) {
 
-	$scope.filtro = {};
+	$scope.filtro = [];
 	$scope.resultados = [];
 
 	$scope.pesquisar = function() {
-
-
 
 		$http({
 			method: 'GET',

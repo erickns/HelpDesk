@@ -9,6 +9,8 @@
   <property name="hibernate.connection.username">HELPDESK_APP</property>
   <property name="hibernate.default_schema">helpdesk_app</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
   <property name="hibernate.generate_statistics">false</property>
   <property name="hibernate.connection.autocommit">false</property>
   <mapping class="com.ens.model.Chamado"/>

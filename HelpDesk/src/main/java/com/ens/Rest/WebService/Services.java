@@ -32,45 +32,40 @@ public class Services {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/incluir")
-	public RetornoDTO incluir(ChamadoDTO dto) {
-		return chamadoService.salvarChamado(dto);
+	public Response incluir(ChamadoDTO dto) {
+		return Response.ok().entity(chamadoService.salvarChamado(dto)).build();
 	}
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/listar")
-	public List<ChamadoDTO> listar(@QueryParam("id")Long id,
-			@QueryParam("dtInicio")String dtInicio,
-			@QueryParam("dtFim")String dtFim,
-			@QueryParam("Status")String status) {
-	
-		ConsultaDTO dto = new ConsultaDTO(id, status,dtInicio, dtFim);		
-		return chamadoService.listarChamados(dto);
+	public Response listar(ConsultaDTO dto) {		
+		return Response.ok().entity(chamadoService.listarChamados(dto)).build();
 	}
 	
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/buscar/{id}")
-	public ChamadoDTO buscar(@PathParam("id")Long id) {
-		return chamadoService.buscarChamado(id);
+	public Response buscar(@PathParam("id")Long id) {
+		return Response.ok().entity(chamadoService.buscarChamado(id)).build();
 	}
 	
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/atualizar")
-	public RetornoDTO atualizar(ChamadoDTO dto) {
-		return chamadoService.salvarChamado(dto);
+	public Response atualizar(ChamadoDTO dto) {
+		return Response.ok().entity(chamadoService.salvarChamado(dto)).build();
 	}
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/incluir/comentario")
-	public RetornoDTO incluirComentario(ComentarioDTO dto) {
-		return chamadoService.salvarComentario(dto);
+	public Response incluirComentario(ComentarioDTO dto) {
+		return Response.ok().entity(chamadoService.salvarComentario(dto)).build();
 	}
 
 }

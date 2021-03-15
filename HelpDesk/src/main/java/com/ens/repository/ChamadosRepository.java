@@ -51,7 +51,7 @@ public class ChamadosRepository extends Repository {
 	public Long salvarChamado(Chamado chamado) {
 		Session s = this.getSessionFactory().openSession();
 		Transaction t = s.beginTransaction();
-		try {
+		
 			if (chamado.getId() == null) {
 				s.save(chamado);
 			} else {
@@ -59,16 +59,7 @@ public class ChamadosRepository extends Repository {
 			}
 			t.commit();
 			s.close();
-		} catch (Exception e) {
-			if (s.isConnected()) {
-				s.close();
-			}
-			e.printStackTrace();
-		}
-		if (s.isConnected()) {
-			s.close();
-		}
-		
+			
 		return chamado.getId();
 	}
 	
