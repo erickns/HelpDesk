@@ -1,0 +1,91 @@
+<!-- <h1 class="span12" style="text-align: center">FlexMobile Chamados</h1> -->
+<div class="span12"></div>
+<div class="frame" >
+	<div >
+		<form class="form-horiontal" action="">
+			<div class="rowFluid" style="text-align: center ">
+				<div class="span12" style="text-align: center; margin-top: 24px">
+					<label>ID: 
+						<input type="text" ng-model="chamado.id" 
+						style="text-align: center;margin-right: 10px;padding: 0"  maxlength="5" disabled="true"/>
+					</label> 
+					<label>Titulo: 
+						<input type="text" ng-model="chamado.titulo" class="span4" style=" text-align: center;margin-right: 10px" disabled="true"/>
+					</label> 
+					<label>Status:
+						<select class="span4" ng-model="chamado.status" style=" text-align: center">
+							<option value="ABERTO">ABERTO</option>
+							<option value="EM ANALISE">EM ANALISE</option>
+							<option value="FECHADO">FECHADO</option>
+						</select>
+					</label>
+				</div>
+				<div class="span12"></div>
+				<div class="span12" style="text-align: center; margin-top: 24px">
+					<label>Data Abertura: 
+						<input type="text" ng-model="chamado.dtInclusao" class="span4" style=" margin-right: 10px;text-align: center" disabled="true"/>
+					</label> 
+					<label>Data Fechamento: 
+						<input type="text" ng-model="chamado.dtConclusao" class="sapn4" disabled="true" style=" text-align: center"/>
+					</label>
+				</div>
+				<div class="span12" style="text-align: center; margin-top: 24px">
+					<label for="descricao" style="text-align: left">Descricao:</label>
+				</div>
+				<div class="span12">
+					<textarea rows="4" cols="50" style="text-align: left" maxlength="1000" >
+						{{chamado.descricao}}
+					</textarea>
+				</div>
+			</div>
+			<hr>
+		</form>
+	</div>
+	<div style="text-align: center">
+		<div>
+			<h3>Comentarios</h3>
+		</div>
+		<div class="span12">
+			<div class="span3"></div>
+			<div class="span3"></div>
+			<div class="span3"></div>
+			<div class="span3"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalComenatrio" style="margin-top: 24px; margin-left: 24px">ADD Comentario</button></div>
+		</div>
+		<div style="margin-top: 10px" ng-repeat="coment in chamado.comentarios">
+			<div class="span12"><label>Data do Comentario: {{coment.dtInclusao}}</label></div>
+			<div class="rowFluid" >
+				<textarea rows="4" cols="50" style="text-align: left" maxlength="1000" disabled="true">
+					{{coment.descricao}}
+				</textarea>
+			</div>
+		</div>
+	</div>
+	<div>
+		<hr>
+			<footer style="text-align: right">
+				<button type="button" ng-click="atualizar()" style="margin-bottom: 24px;  margin-rightt: 24px">SALVAR</button>
+				<button type="button" ng-click="cancelar()" style="margin-bottom: 24px; margin-rightt: 30px">Cancelar</button>
+			</footer>
+	</div>
+</div>
+
+
+<div class="modal fade" id="modalComenatrio" tabindex="-1" role="dialog" aria-labelledby="modalComenatrioLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalComenatrioLabel">Adicionar Comentario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <textarea ng-model="comentario.descricao" rows="4" cols="50" style="text-align: center" maxlength="1000" ></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" ng-click="addComentario()" class="btn btn-primary">SALVAR</button>
+      </div>
+    </div>
+  </div>
+</div>

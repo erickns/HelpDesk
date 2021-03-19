@@ -55,7 +55,7 @@ public class ChamadosRepository extends Repository {
 			if (chamado.getId() == null) {
 				s.save(chamado);
 			} else {
-				s.update(chamado);
+				s.merge(chamado);
 			}
 			t.commit();
 			s.close();

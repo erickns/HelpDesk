@@ -1,64 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="HelpDesk">
 <head>
+<meta charset="ISO-8859-1">
 <title>HelpDesk</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="static/css/style.css" rel="stylesheet">
+
+<script src="static/js/resources/angular.js"></script>
+<script src="static/js/resources/angular-route.js"></script>
+<!-- <link href="static/css/style.css" rel="stylesheet"> -->
+<link href="static/css/bootstrap.min.css" rel="stylesheet">
+<script src="static/js/resources/jquery.min.js"></script>
+<!-- <script src="static/js/resources/popper.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<!-- <script src="static/js/resources/bootstrap.min.js"></script> -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="static/js/controller/chamadoController.js"></script>
+
+
 </head>
-<body ng-app="HelpDesk">
-	<h1 class="span1">FlexMobile Chamados</h1>
-	<div class="frame" ng-controller="chamadoController as controller">
-		<div >
-			<form class="formulario" ng-submit="pesquisar()">
-				<div class="span3">
-					<div class="row1" >
-						<label>Data Inicio: <input type="Date"
-							ng-model="filtro.dataInicio" class="span8" /></label> 
-							<label>Data Fim: <input type="Date" ng-model="filtro.dataFim" class="span8" />
-						</label>
-					</div>
-					<div class="row2" >
-						<label>ID: <input type="text" ng-model="filtro.idChamado"class="span12" /></label> 
-						<label>Status: 
-							<select id="status" ng-model="filtro.status">
-								<option value="" selected="selected">selecione</option>
-								<option value="AB">ABERTO</option>
-								<option value="EA">EM ANALISE</option>
-								<option value="FE">FECHADO</option>
-							</select>
-						</label>
-						<button type="submit" style="margin-top: 24px;margin-left: 24px">BUSCAR</button>
-					</div>
-					<div class="row3"><button ng-click="criarNovo()" style="margin-top: 24px">Novo Chamado</button></div>
-				</div>
-				<hr>
-			</form>
-		</div>
-		<div class="span2">
-			<table id="table-1" >
-				<thead>
-					<tr>
-						<th style="width: 15% " class="{sorter: false} ng-binding">ID</th>
-						<th style="width: 20%" class="{sorter: false} ng-binding">DATA ABERTURA</th>
-						<th style="width: 40%" class="{sorter: false} ng-binding">TITULO</th>
-						<th style="width: 20%" class="{sorter: false} ng-binding">STATUS</th>
-						<th style="width: 5%" class="{sorter: false} ng-binding"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="element in resultados.result">
-						<td style="text-align: center;">{{elemento.id | number}}</td>
-						<td style="text-align: center;">{{elemento.dtInclusao | date:dd/mm/yyyy}}</td>
-						<td style="text-align: center;">{{elemento.titulo}}</td>
-						<td style="text-align: center;">{{elemento.status.description}}</td>
-						<td style="text-align: center;"><button ng-click="buscar(element)">Editar</button></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		</div>
-		<script src="static/js/resources/angular.js"></script>
-		<script src="static/js/controller/chamadoController.js"></script>
-		<style src=""></style>
+<body>
+	<h1 class="span12" style="text-align: center">FlexMobile Chamados</h1>
+	<div ng-view=""></div>
 </body>
 </html>

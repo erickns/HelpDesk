@@ -24,3 +24,8 @@ table, th, td {
     flex-direction: column;
     text-align: center;
 }
+
+div.row4,div.row4 {
+	display:block;
+    margin: 0 auto;
+}

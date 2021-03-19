@@ -1,0 +1,33 @@
+<div class="span12"></div>
+<div class="frame" >
+	<div >
+		<form class="form-horiontal" ng-submit="addChamado()">
+			<div class="rowFluid" style="text-align: center ">
+				<div class="span12" style="text-align: center; margin-top: 24px">
+					<label>Titulo: 
+						<input type="text" ng-model="chamado.titulo" class="span4" style=" text-align: center;margin-right: 10px" />
+					</label> 
+					<label>Status:
+						<select class="span4" ng-model="chamado.status" style=" text-align: center" ng-required="true">
+							<option value="ABERTO">ABERTO</option>
+							<option value="EM ANALISE">EM ANALISE</option>
+							<option value="FECHADO">FECHADO</option>
+						</select>
+					</label>
+				</div>
+				<div class="span12"></div>
+				<div class="span12" style="text-align: center; margin-top: 24px">
+					<label for="descricao" style="text-align: left">Descricao:</label>
+				</div>
+				<div class="span12">
+					<textarea ng-model="chamado.descricao" rows="4" cols="50" style="text-align: left" maxlength="1000" ></textarea>
+				</div>
+				<div class="span12">
+					<button type="submit" style="margin-top: 24px">Criar Chamado</button>
+					<button type="button" ng-click="cancelar()" style="margin-bottom: 24px; margin-rightt: 30px">Cancelar</button>
+				</div>
+			</div>
+			<hr>
+		</form>
+	</div>
+</div>

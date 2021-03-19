@@ -1,9 +1,6 @@
 package com.ens.dto;
 
-import java.util.Date;
-
 import com.ens.model.domain.DominioStatus;
-import com.ens.utils.Util;
 
 public class ConsultaDTO {
 	

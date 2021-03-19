@@ -1,58 +1,208 @@
-/**
- * 
- */
+var App = angular.module('HelpDesk', ["ngRoute"]);
+App.value('urlBase', 'http://localhost:8080/HelpDesk-0.0.1-SNAPSHOT/rest/service')
+App.config(function($routeProvider) {
+	$routeProvider
+		.when('/', {
+			templateUrl: 'static/view/home.html',
+			controller: 'chamadoController'
+		})
+		.when('/chamados/edit/:id', {
+			templateUrl: 'static/view/edit.html',
+			controller: 'editarController'
+		})
+		.when('/chamados/novo', {
+			templateUrl: 'static/view/adicionar.html',
+			controller: 'novoController'
+		});
 
-angular.module("HelpDesk", [])
-value("urlBase", "http://localhost:8080/HelpDesk-0.0.1-SNAPSHOT/rest/service/");
-controller("chamadoController", function($scope, $http, $notify, urlBase) {
+	//$routeProvider.otherWise({ redirectTo: '/index' });
 
-	$scope.filtro = [];
+});
+
+App.controller('chamadoController', function($scope, $http, $window, $location, $routeParams, $route, urlBase) {
+
+
+	//var urlBase = 'http://localhost:8080/HelpDesk-0.0.1-SNAPSHOT/rest/service';
+	var hoje = new Date();
+	$scope.filtro = {};
+	$scope.filtro.idChamado = null;
+	$scope.filtro.dataInicio = null;
+	$scope.filtro.dataFim = null;
+	$scope.filtro.status = null;
 	$scope.resultados = [];
 
 	$scope.pesquisar = function() {
 
-		$http({
+		var response;
+		var err;
+		var param = montarParamsFiltro();
+
+		var req = {
 			method: 'GET',
-			URL: urlBase + '',
-			data: $scope.filtro
-		}, then(function successCallback(response) { scope.resultados = response.data }
-			, function errorCallback(response) { $.notify("Erro na operacao", "error"); }
-		));
+			url: urlBase + '/listar' + param,
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			//data: $scope.filtro
+
+		};
+
+		$http(req).then(function(response) {
+			$scope.resultados = response.data;
+		}, function(err) {
+			alert(err.data.mensagem);
+		});
+
 	};
 
-	$scope.buscar = function(element) {
+	var montarParamsFiltro = function() {
+		var param = '?';
+		if ($scope.filtro.idChamado !== null && $scope.filtro.idChamado !== undefined) {
+			param = param + 'idChamado=' + $scope.filtro.idChamado;
+		}
+		if ($scope.filtro.status !== null && $scope.filtro.status !== undefined) {
+			param = param + '&status=' + $scope.filtro.status.value;
+		}
+		if ($scope.filtro.dataInicio !== null && $scope.filtro.dataInicio !== undefined) {
+			var dataInicio = $scope.filtro.dataInicio.getFullYear() + '-' + addZero($scope.filtro.dataInicio.getMonth() + 1) + '-' + addZero($scope.filtro.dataInicio.getDate());
+			param = param + '&dtInicio=' + dataInicio;
+		}
+		if ($scope.filtro.dataFim !== null && $scope.filtro.dataFim !== undefined) {
+			var dataFim = $scope.filtro.dataFim.getFullYear() + '-' + addZero($scope.filtro.dataFim.getMonth() + 1) + '-' + addZero($scope.filtro.dataFim.getDate());
+			param = param + '&dtFim=' + dataFim;
+		}
+		return param;
 
-		$http({
+	}
+	function addZero(numero) {
+		if (numero <= 9)
+			return "0" + numero;
+		else
+			return numero;
+	}
+
+
+	$scope.novoChamado = function() {
+		$location.path('/chamados/novo');
+	};
+
+	$scope.editar = function(id) {
+		$location.path('/chamados/edit/' + id);
+	};
+
+}
+
+)
+App.controller('editarController', function($scope, $http, $window, $location, $routeParams, $route, urlBase) {
+	$scope.id = $routeParams.id;
+	console.log('recebendo id: ' + $scope.id);
+	console.log('request API: ' + urlBase + '/buscar/' + $scope.id);
+
+	$scope.chamado = {};
+	$scope.comentario = {};
+
+	$scope.comentario.idChamado = $scope.id;
+	$scope.comentario.descricao = "";
+
+	$scope.buscar = function() {
+		var response;
+		var err;
+		var req = {
 			method: 'GET',
-			URL: urlBase + '',
-			data: element
-		}, then(function successCallback(response) { scope.resultados = response.data }
-			, function errorCallback(response) { $.notify("Erro na operacao", "error"); }
-		));
+			url: urlBase + '/buscar/' + $scope.id,
+			headers: {
+				'Content-Type': 'application/json'
+			}
+			//data: $scope.filtro
+		};
+		$http(req).then(function(response) {
+			$scope.chamado = response.data;
+		}, function(err) {
+			alert(err.data.mensagem);
+		});
 	};
 
-	$scope.criarNovo = function() {
+	$scope.atualizar = function() {
+		var response;
+		var err;
 
-		$scope.novoChamado = {};
-
-		$http({
-			method: 'POST',
-			URL: urlBase + '',
-			data: $scope.novoChamado
-		}, then(function successCallback(response) { $.notify("chamado criado", "success"); }
-			, function errorCallback(response) { $.notify("Erro na operacao ", "error"); }
-		));
-	};
-
-	$scope.editar = function(element) {
-
-		$http({
+		var req = {
 			method: 'PUT',
-			URL: urlBase + '',
-			data: element
-		}, then(function successCallback(response) { $.notify("Edição Concluida", "success"); }
-			, function errorCallback(response) { $.notify("Erro na operacao", "error"); }
-		));
+			url: urlBase + '/atualizar/',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: $scope.chamado
+		};
+		$http(req).then(function(response) {
+			alert(response.data.mensagem);
+			$location.path('/chamados/edit/' + $scope.chamado.id);
+		}, function(err) {
+			alert(err.data.mensagem);
+		});
+	};
+
+	$scope.cancelar = function() {
+		$location.path('/');
+	};
+
+	$scope.addComentario = function() {
+		var response;
+		var err;
+
+		var req = {
+			method: 'POST',
+			url: urlBase + '/incluir/comentario',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: $scope.comentario
+
+		};
+		$http(req).then(function(response) {
+			$('#modalComenatrio').modal('hide');
+			$scope.comentario.descricao = ""
+			alert(response.data.mensagem);
+		}, function(err) {
+			alert(err.data.mensagem);
+		});
+	};
+
+	$scope.buscar();
+
+})
+
+App.controller('novoController', function($scope, $http, $window, $location, $routeParams, $route, urlBase) {
+	$scope.chamado = {};
+	$scope.chamado.titulo = "";
+	$scope.chamado.descricao = "";
+	$scope.chamado.status = "";
+
+	$scope.addChamado = function() {
+		var response;
+		var err;
+
+		var req = {
+			method: 'POST',
+			url: urlBase + '/incluir',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			data: $scope.chamado
+
+		};
+		$http(req).then(function(response) {
+			$scope.chamado.titulo = "";
+			$scope.chamado.descricao = "";
+			$scope.chamado.status = "";
+			alert(response.data.mensagem);
+		}, function(err) {
+			alert(err.data.mensagem);
+		});
+	};
+
+	$scope.cancelar = function() {
+		$location.path('/');
 	};
 
 });

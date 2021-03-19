@@ -25,9 +25,10 @@ import com.ens.service.ChamadoService;
 
 @Path("/service")
 public class Services {
-	
-	@Inject ChamadoService chamadoService = new ChamadoService();
-	
+
+	@Inject
+	ChamadoService chamadoService = new ChamadoService();
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -35,23 +36,26 @@ public class Services {
 	public Response incluir(ChamadoDTO dto) {
 		return Response.ok().entity(chamadoService.salvarChamado(dto)).build();
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/listar")
-	public Response listar(ConsultaDTO dto) {		
+	public Response listar(@QueryParam("idChamado") Long idChamado, @QueryParam("status") String status,
+			@QueryParam("dtInicio") String dtInicio, @QueryParam("dtFim") String dtFim) {
+
+		ConsultaDTO dto = new ConsultaDTO(idChamado, status, dtInicio, dtFim);
 		return Response.ok().entity(chamadoService.listarChamados(dto)).build();
 	}
-	
+
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/buscar/{id}")
-	public Response buscar(@PathParam("id")Long id) {
+	public Response buscar(@PathParam("id") Long id) {
 		return Response.ok().entity(chamadoService.buscarChamado(id)).build();
 	}
-	
+
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -59,7 +63,7 @@ public class Services {
 	public Response atualizar(ChamadoDTO dto) {
 		return Response.ok().entity(chamadoService.salvarChamado(dto)).build();
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
