@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/erick/git/HelpDesk/HelpDesk</OriginalElement>
+  <nodes>
+    <node x="810.0" y="20.0">com.ens.model.domain.HttpsStatus</node>
+    <node x="20.0" y="20.0">com.ens.dto.RetornoDTO</node>
+    <node x="0.0" y="913.0">com.ens.repository.HibernateUtil</node>
+    <node x="487.0" y="913.0">com.ens.repository.Repository</node>
+    <node x="675.0" y="726.0">com.ens.service.ChamadoService</node>
+    <node x="733.0" y="913.0">com.ens.Rest.Rest</node>
+    <node x="313.0" y="0.0">com.ens.dto.ChamadoDTO</node>
+    <node x="0.0" y="726.0">com.ens.repository.ChamadosRepository</node>
+    <node x="573.0" y="0.0">com.ens.model.Chamado</node>
+    <node x="289.0" y="407.0">com.ens.dto.ComentarioDTO</node>
+    <node x="494.0" y="407.0">com.ens.model.Comentario</node>
+    <node x="250.0" y="913.0">com.ens.utils.Util</node>
+    <node x="20.0" y="427.0">com.ens.model.domain.DominioStatus</node>
+    <node x="680.0" y="407.0">com.ens.dto.ConsultaDTO</node>
+    <node x="338.0" y="726.0">com.ens.Rest.WebService.Services</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.ens.dto.RetornoDTO" target="com.ens.dto.RetornoDTO" relationship="DEPENDENCY">
+      <point x="0.0" y="-171.0" />
+      <point x="144.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="191.0" />
+      <point x="-124.0" y="0.0" />
+    </edge>
+    <edge source="com.ens.model.domain.HttpsStatus" target="com.ens.model.domain.HttpsStatus" relationship="DEPENDENCY">
+      <point x="0.0" y="-160.0" />
+      <point x="907.0" y="0.0" />
+      <point x="790.0" y="0.0" />
+      <point x="790.0" y="180.0" />
+      <point x="-97.0" y="0.0" />
+    </edge>
+    <edge source="com.ens.model.domain.DominioStatus" target="com.ens.model.domain.DominioStatus" relationship="DEPENDENCY">
+      <point x="0.0" y="-127.0" />
+      <point x="132.0" y="407.0" />
+      <point x="0.0" y="407.0" />
+      <point x="0.0" y="554.0" />
+      <point x="-112.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.5673267326732673" showDependencies="true" x="502.0" y="495.00000000000006" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
